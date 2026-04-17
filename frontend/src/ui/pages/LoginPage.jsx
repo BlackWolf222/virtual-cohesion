@@ -24,7 +24,7 @@ export function LoginPage() {
         navigate('/survey')
         return
       }
-      navigate('/dashboard')
+      navigate('/calendar')
     } catch {
       setError('Invalid login details for this tenant.')
     }

@@ -5,6 +5,7 @@ import { useAuth } from '../../state/AuthContext'
 export function AppShell({ title, children }) {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const isSurveyLocked = user?.role === 'EMPLOYEE' && user?.survey_completed === false
 
   const onLogout = () => {
     logout()
@@ -22,10 +23,17 @@ export function AppShell({ title, children }) {
           </div>
         </div>
         <nav className="nav-col">
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/survey">Survey</Link>
-          <Link to="/invites">Invites</Link>
-          <Link to="/hr">HR Analytics</Link>
+          {isSurveyLocked ? (
+            <Link to="/survey">Survey</Link>
+          ) : (
+            <>
+              <Link to="/calendar">Naptár</Link>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/survey">Survey</Link>
+              <Link to="/invites">Invites</Link>
+              <Link to="/hr">HR Analytics</Link>
+            </>
+          )}
         </nav>
         <button className="btn btn-secondary" onClick={onLogout}>
           Sign out

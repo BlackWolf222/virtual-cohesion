@@ -36,7 +36,7 @@ export function SurveyPage() {
       await api.post('/surveys/me/', payload)
       setUser({ ...user, survey_completed: true })
       setStatus('Survey saved.')
-      navigate('/dashboard')
+      navigate('/calendar')
     } catch {
       setStatus('Could not save survey.')
     }
